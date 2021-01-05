@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../hugo-tailwind-nord/.idea/hugo-theme-tailwindcss-starter.iml" filepath="$PROJECT_DIR$/../hugo-tailwind-nord/.idea/hugo-theme-tailwindcss-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hugo-tailwind-nord-theme/.idea/hugo-tailwind-nord-theme.iml" filepath="$PROJECT_DIR$/../hugo-tailwind-nord-theme/.idea/hugo-tailwind-nord-theme.iml" />
     </modules>
   </component>
 </project>

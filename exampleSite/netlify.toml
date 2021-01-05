@@ -1,0 +1,42 @@
+[build]
+    publish = "public"
+    command = "hugo --gc --minify"
+
+[context.production.environment]
+    HUGO_VERSION = "0.80.0"
+    HUGO_ENV = "production"
+    HUGO_ENABLEGITINFO = "true"
+
+[context.split1]
+    command = "hugo --gc --minify --enableGitInfo"
+
+[context.split1.environment]
+    HUGO_VERSION = "0.80.0"
+    HUGO_ENV = "production"
+
+[context.deploy-preview]
+    command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+
+[context.deploy-preview.environment]
+    HUGO_VERSION = "0.80.0"
+
+[context.branch-deploy]
+    command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy.environment]
+    HUGO_VERSION = "0.80.0"
+
+[context.next.environment]
+    HUGO_ENABLEGITINFO = "true"
+
+[[headers]]
+    for = "/*"
+    [headers.values]
+        Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+        Content-Security-Policy = "script-src 'self'"
+        X-Frame-Options = "SAMEORIGIN"
+        X-Xss-Protection = "1; mode=block"
+        X-Content-Type-Options = "nosniff"
+        Referrer-Policy = "no-referrer"
+        Feature-Policy = "sync-xhr 'self'"
+        Privacy-Policy = "vibrate 'self'; usermedia *; sync-xhr 'self'"

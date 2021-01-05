@@ -1,12 +1,11 @@
-theme = "hugo-tailwind-nord"
+theme = "hugo-tailwind-nord-theme"
 languageCode = "en-us"
 baseurl = "https://gohugo.io/"
-title = "Hugo Tailwind Nord Site"
+title = "Hugo Tailwind Nord Theme"
 
 author = "Law Zava"
 description = "Law Zava's site"
 
-# Code higlighting settings
 pygmentsCodefences = true
 pygmentsStyle = "rrt"
 DefaultContentLanguage = "en"
@@ -20,25 +19,13 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
 [params]
     favicon = "favicon.svg"
     disclaimer = "No Trackers. No Cookies. No Visit Logs."
-    copyright = "Copyright © 2020, Law Zava, all rights reserved."
+    copyright = "Copyright © 2021, Law Zava, all rights reserved."
     images = ["img/lawzava.png"]
     author = "Law Zava"
     github = "https://github.com/lawzava"
     ogimage = "/img/lawzava.png"
     sitename = "Law Zava"
     description = "Law Zava's personal site"
-
-[params.index]
-    image = "/img/lawzava.svg"
-    imageAlt = "Law Zava"
-    title = "Law Zava"
-    description = "Software Engineer & Serial Startup'eer"
-    slogan = "It's boring to stay still"
-
-[params.links]
-    github = "https://github.com/lawzava"
-    linkedin = "https://linkedin.com/in/lawzava"
-    rss = "index.xml"
 
 [languages]
     [languages.en]
@@ -53,3 +40,10 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
         title = "home"
         url = "/"
         weight = 1
+
+    [[menu.main]]
+        identifier = "dome"
+        name = "Dome"
+        title = "Dome"
+        url = "#dome"
+        weight = 2

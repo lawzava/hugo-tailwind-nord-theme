@@ -1,25 +1,170 @@
-<head>
+<head itemscope itemtype="{{ .Site.BaseURL }}">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ block "title" . }}
-    {{- .Title }} - {{ .Site.Title -}}
-    {{ end }}</title>
-    {{- if .Description }}
-    <meta name="description" content="{{ .Description }}" />
-    {{ end -}}
-    {{- if .Keywords }}
-    <meta name="keywords" content="{{ delimit .Keywords "," }}" />
-    {{ end -}}
-    {{- if .Params.Author }}
-    <meta name="author" content="{{ .Params.Author}}" />
-    {{ end -}}
-    {{ hugo.Generator }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title itemprop="name">{{ if eq .Title .Site.Title}}{{ .Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+    <meta name="twitter:title" content="{{ .Title }} | {{ .Site.Title }}" />
+    <meta itemprop="name" content="{{ .Title }} | {{ .Site.Title }}" />
+    <meta name="application-name" content="{{ .Title }} | {{ .Site.Title }}" />
+    <meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
+
+    <base href="{{ .Permalink }}">
+    <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+    <meta name="url" content="{{ .Permalink }}" />
+    <meta name="twitter:url" content="{{ .Permalink }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+
+    <meta property="og:locale" content="{{ .Language.Lang }}">
+    <meta name="language" content="{{ .Language.LanguageName }}">
+    {{ range .AllTranslations }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
+    {{ end }}
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    {{ with .Params.image }}
+    <meta itemprop="image" content="{{ . | absURL }}" />
+    <meta property="og:image" content="{{ . | absURL }}" />
+    <meta name="twitter:image" content="{{ . | absURL }}" />
+    <meta name="twitter:image:src" content="{{ . | absURL }}" />
+    {{ else }}
+    {{ with .Site.Params.image }}
+    <meta itemprop="image" content="{{ . | absURL }}" />
+    <meta property="og:image" content="{{ . | absURL }}" />
+    <meta name="twitter:image" content="{{ . | absURL }}" />
+    <meta name="twitter:image:src" content="{{ . | absURL }}" />
+    {{ else }}
+    <meta itemprop="image" content="{{ .Site.Params.ogimage | absURL }}" />
+    <meta property="og:image" content="{{ .Site.Params.ogimage | absURL }}" />
+    <meta name="twitter:image" content="{{ .Site.Params.ogimage | absURL }}" />
+    <meta name="twitter:image:src" content="{{ .Site.Params.ogimage | absURL }}" />
+    {{ end }}
+    {{ end }}
+
+    <meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ .Site.BaseURL }}sitemap.xml" />
+
+    {{ with .OutputFormats.Get "RSS" }}
+    <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+    <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+    {{ end }}
+
+    {{ if eq .Section "blog" }}
+    <meta name="description" content="{{ .Params.summary }}" />
+    <meta itemprop="description" content="{{ .Params.summary }}" />
+    <meta property="og:description" content="{{ .Params.summary }}" />
+    <meta name="twitter:description" content="{{ .Params.summary }}" />
+
+    {{ $paginator := .Paginate (where .Pages "Section" "blog") }}
+    {{ if $paginator }}
+    <link rel="first" href="{{ $paginator.First.URL }}">
+    <link rel="last" href="{{ $paginator.Last.URL }}">
+    {{ if $paginator.HasPrev }}
+    <link rel="prev" href="{{ $paginator.Prev.URL }}">
+    {{end }}
+    {{ if $paginator.HasNext }}
+    <link rel="next" href="{{ $paginator.Next.URL }}">
+    {{end }}
+    {{end }}
+
+    <meta property="og:type" content="article" />
+    <meta property="article:publisher" content="{{ .Site.Params.github }}" />
+    <meta property="og:article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+    <meta property="article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+
+    {{ with.Params.author }}
+    <meta property="og:article:author" content="{{humanize . }}" />
+    <meta property="article:author" content="{{humanize . }}" />
+    <meta name="author" content="{{humanize . }}" />
+    {{ end }}
+
+    {{ with.Params.category }}
+    <meta name="news_keywords" content="{{ index . 0 }}" />
+    <meta property="article:section" content="{{ index . 0 }}" />
+    {{ end }}
+
+    <script defer type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Article",
+            "headline": {{ .Title }},
+        "author": {
+        "@type": "Person",
+        "name": "{{ .Site.Params.github }}"
+        },
+        "datePublished": "{{ .Date.Format "2006-01-02" }}",
+        "description": {{ .Site.Params.description }},
+        "wordCount": {{ .WordCount }},
+        "mainEntityOfPage": "True",
+        "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+        "image": {
+        "@type": "imageObject",
+        "url": "{{ with .Site.Params.image }}{{ .Permalink }}{{ end }}"
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "{{ .Site.Title }}",
+        "logo": {
+        "@type": "imageObject",
+        "url": "https://lawzava.com/img/lawzava.svg"
+        }
+        }
+        }
+    </script>
+    {{ else }}
+    <meta property="og:type" content="website" />
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    <meta itemprop="description" content="{{ .Site.Params.description }}" />
+    <meta property="og:description" content="{{ .Site.Params.description }}" />
+    <meta name="twitter:description" content="{{ .Site.Params.description }}" />
+    {{ end }}
+
+    {{ if or (eq .Section "about") (eq .Section "contact") }}
+    <meta property="og:type" content="website" />
+    <meta name="author" content="{{ .Site.Params.author }}" />
+    <script defer type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "{{ .Permalink }}",
+            "sameAs": [
+                "{{ .Site.Params.github }}"
+            ],
+            "name": "{{ .Title }}",
+            "logo": "https://lawzava.com/favicon.svg"
+        }
+    </script>
+    {{ end }}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#141414" />
+    <meta name="msapplication-TileColor" content="#141414" />
+
+    <meta name="keywords" content="{{ .Keywords }}" />
+    <meta name="imagemode" content="force" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.sitename }}" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes" />
 
     {{- $styles := resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") -}}
     {{- if .Site.IsServer }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
     {{ else }}
-        {{- $styles := $styles| minify | fingerprint | resources.PostProcess -}}
-    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+    {{- $styles := $styles| minify | fingerprint | resources.PostProcess -}}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}">
     {{ end -}}
 </head>

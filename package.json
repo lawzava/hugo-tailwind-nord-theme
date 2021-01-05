@@ -1,7 +1,7 @@
 {
-    "name": "hugo-tailwind-boilerplate",
+    "name": "hugo-tailwind-nord-theme",
     "version": "0.1.0",
-    "description": "Hugo + Tailwind + Nord theme boilerplate",
+    "description": "Hugo Tailwind Nord Theme",
     "main": "index.js",
     "repository": "https://github.com/lawzava/hugo-tailwind-boilerplate",
     "author": "lawzava <law@zava.dev>",

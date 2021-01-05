@@ -1,5 +1,5 @@
-name = "hugo-tailwind-nord"
-description = "Hugo + Tailwind + Nord theme boilerplate"
+name = "hugo-tailwind-nord-theme"
+description = "Hugo Tailwind Nord Theme"
 homepage = ""
 tags = ["Hugo", "Tailwind CSS", "theme", "Nord Theme", "boilerplate"]
 features = []
