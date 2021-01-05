@@ -57,4 +57,6 @@ Documentation for Hugo's [PostCSS setup](https://gohugo.io/hugo-pipes/postproces
 
 Documentation for [Tailwind CSS setup of calling PurgeCSS manually](https://tailwindcss.com/docs/controlling-file-size#setting-up-purgecss-manually).
 
+Color scheme for [Nord Theme](https://nordtheme.com).
+
 Theme was inspired by [https://github.com/dirkolbrich/hugo-theme-tailwindcss-starter](https://github.com/dirkolbrich/hugo-theme-tailwindcss-starter)
