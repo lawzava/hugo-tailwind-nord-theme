@@ -1,0 +1,11 @@
+<ul id="nav-menu" class="mx-auto w-full sm:flex sm:mx-auto sm:w-auto sm:block text-right mt-2 sm:mt-0 sm:space-x-2 lowercase hidden">
+    {{ $currentPermalink := .RelPermalink}}
+    {{ range .Site.Menus.main }}
+    <li>
+        <a href='{{ if eq .URL "/" }}/{{else}}{{.URL}}/{{end}}'
+           class='p-4 {{ if eq $currentPermalink .URL | or (and (ne .URL "/") (hasPrefix $currentPermalink .URL)) }} font-bold {{ end }}'>
+            <span>{{ .Name }}</span>
+        </a>
+    </li>
+    {{ end }}
+</ul>

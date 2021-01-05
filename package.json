@@ -1,0 +1,27 @@
+{
+    "name": "hugo-tailwind-boilerplate",
+    "version": "0.1.0",
+    "description": "Hugo + Tailwind + Nord theme boilerplate",
+    "main": "index.js",
+    "repository": "https://github.com/lawzava/hugo-tailwind-boilerplate",
+    "author": "lawzava <law@zava.dev>",
+    "scripts": {
+        "start": "hugo --gc"
+    },
+    "devDependencies": {
+        "@ctrl/tinycolor": "^3.3.1",
+        "@fullhuman/postcss-purgecss": "^2.3.0",
+        "autoprefixer": "^10.1.0",
+        "postcss": "^8.2.2",
+        "postcss-cli": "^7.1.2",
+        "postcss-import": "^12.0.1",
+        "tailwindcss": "^2.0.2",
+        "tailwindcss-theming": "^3.0.0-beta.3"
+    },
+    "browserslist": [
+        "last 1 version",
+        "> 1%",
+        "maintained node versions",
+        "not dead"
+    ]
+}

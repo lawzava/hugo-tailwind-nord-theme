@@ -1,0 +1,10 @@
+name = "hugo-tailwind-nord"
+description = "Hugo + Tailwind + Nord theme boilerplate"
+homepage = ""
+tags = ["Hugo", "Tailwind CSS", "theme", "Nord Theme", "boilerplate"]
+features = []
+min_version = "0.80"
+
+[author]
+  name = "Law Zava"
+  homepage = "https://github.com/lawzava/"
